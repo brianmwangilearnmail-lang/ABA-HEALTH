@@ -1,6 +1,22 @@
-import { Search, ShoppingCart, Menu, Upload, Plus, Minus, ArrowRight, Package } from 'lucide-react';
+import { Search, ShoppingCart, Menu, Upload, Plus, Minus, ArrowRight, Package, Leaf, ShieldCheck, Zap, Facebook, Twitter, Instagram } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState, useRef } from 'react';
+
+const productsData = [
+  { id: 1, title: "100% Wild Alaskan Salmon Oil", composition: "Omega-3 EPA & DHA & Omega 5, 6, 7, 8 & 9 plus Astaxanthin & Vitamin D", brand: "Natural Factors", price: 3500 },
+  { id: 2, title: "Advanced Omega-3 Complex", composition: "High Potency EPA/DHA Fish Oil", brand: "Doppelherz", price: 4200 },
+  { id: 3, title: "Daily Multivitamin Plus", composition: "Essential Vitamins & Minerals", brand: "Natural Factors", price: 2800 },
+  { id: 4, title: "Vitamin C 1000mg + Zinc", composition: "Immune System Support & Antioxidant", brand: "Natural Factors", price: 1500 },
+  { id: 5, title: "Magnesium Bisglycinate", composition: "Muscle Relaxation & Nervous System Health", brand: "Doppelherz", price: 2200 },
+  { id: 6, title: "Probiotic 30 Billion CFU", composition: "10 Strains for Optimal Gut Flora", brand: "Natural Factors", price: 3800 },
+  { id: 7, title: "Vitamin D3 5000 IU", composition: "Bone Health & Immune Support", brand: "Doppelherz", price: 1200 },
+  { id: 8, title: "Collagen Peptides Powder", composition: "Hydrolyzed Type I & III Collagen", brand: "Natural Factors", price: 4500 },
+  { id: 9, title: "Ashwagandha Root Extract", composition: "Adaptogen for Stress & Anxiety Relief", brand: "Doppelherz", price: 2600 },
+  { id: 10, title: "Whey Protein Isolate", composition: "25g Protein for Muscle Recovery", brand: "ABA Premium", price: 6500 },
+  { id: 11, title: "B-Complex 100", composition: "Energy Metabolism & Nervous System", brand: "Natural Factors", price: 1800 },
+  { id: 12, title: "Iron + Vitamin C", composition: "Gentle Iron for Blood Health", brand: "Doppelherz", price: 1400 },
+  { id: 13, title: "Melatonin 5mg", composition: "Natural Sleep Cycle Support", brand: "Natural Factors", price: 1100 }
+];
 
 function ProductCard({ customImage, title, composition, brand, basePrice }: { customImage: string | null, title: string, composition: string, brand: string, basePrice: number }) {
   const [quantity, setQuantity] = useState(1);
@@ -89,7 +105,6 @@ export default function App() {
             <nav className="hidden md:flex space-x-10">
               <a href="#" className="text-gray-900 hover:text-[#ff5e00] font-bold text-sm uppercase tracking-wider transition-colors">Products</a>
               <a href="#" className="text-gray-900 hover:text-[#ff5e00] font-bold text-sm uppercase tracking-wider transition-colors">About Us</a>
-              <a href="#" className="text-gray-900 hover:text-[#ff5e00] font-bold text-sm uppercase tracking-wider transition-colors">Science</a>
               <a href="#" className="text-gray-900 hover:text-[#ff5e00] font-bold text-sm uppercase tracking-wider transition-colors">Contact</a>
             </nav>
 
@@ -207,30 +222,134 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8 max-w-[1400px] mx-auto w-full">
-            <ProductCard 
-              customImage={customImage} 
-              title="100% Wild Alaskan Salmon Oil" 
-              composition="Omega-3 EPA & DHA & Omega 5, 6, 7, 8 & 9 plus Astaxanthin & Vitamin D"
-              brand="Natural Factors"
-              basePrice={3500} 
-            />
-            <ProductCard 
-              customImage={customImage} 
-              title="Advanced Omega-3 Complex" 
-              composition="High Potency EPA/DHA Fish Oil"
-              brand="Doppelherz"
-              basePrice={4200} 
-            />
-            <ProductCard 
-              customImage={customImage} 
-              title="Daily Multivitamin Plus" 
-              composition="Essential Vitamins & Minerals"
-              brand="Natural Factors"
-              basePrice={2800} 
-            />
+            {productsData.map((product) => (
+              <ProductCard 
+                key={product.id}
+                customImage={customImage} 
+                title={product.title} 
+                composition={product.composition}
+                brand={product.brand}
+                basePrice={product.price} 
+              />
+            ))}
           </div>
         </div>
       </section>
+
+      {/* Features Section */}
+      <section className="relative z-20 bg-white py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="font-display font-black text-4xl md:text-5xl text-gray-900 tracking-tighter mb-4">
+              WHY CHOOSE <span className="text-[#ff5e00]">ABA HEALTH</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 bg-[#ccff00]/20 rounded-full flex items-center justify-center mb-6 text-[#88aa00]">
+                <Leaf className="w-10 h-10" />
+              </div>
+              <h3 className="font-black text-xl mb-3 text-gray-900">Sustainably Sourced</h3>
+              <p className="text-gray-600 font-medium">We prioritize the environment by sourcing our ingredients from sustainable, eco-friendly suppliers globally.</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 bg-[#ff5e00]/10 rounded-full flex items-center justify-center mb-6 text-[#ff5e00]">
+                <ShieldCheck className="w-10 h-10" />
+              </div>
+              <h3 className="font-black text-xl mb-3 text-gray-900">Clinically Tested</h3>
+              <p className="text-gray-600 font-medium">Every batch undergoes rigorous third-party testing to ensure maximum purity, potency, and safety.</p>
+            </div>
+            <div className="flex flex-col items-center text-center">
+              <div className="w-20 h-20 bg-blue-500/10 rounded-full flex items-center justify-center mb-6 text-blue-600">
+                <Zap className="w-10 h-10" />
+              </div>
+              <h3 className="font-black text-xl mb-3 text-gray-900">Maximum Absorption</h3>
+              <p className="text-gray-600 font-medium">Formulated with advanced delivery systems to ensure your body absorbs the nutrients it needs efficiently.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="relative z-20 bg-gray-50 py-24 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-16">
+          <div className="md:w-1/2">
+            <div className="aspect-square bg-gray-200 rounded-3xl overflow-hidden relative">
+              <img src="https://images.unsplash.com/photo-1576602976047-174e57a47881?q=80&w=1000&auto=format&fit=crop" alt="Laboratory" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#ff5e00]/40 to-transparent mix-blend-multiply"></div>
+            </div>
+          </div>
+          <div className="md:w-1/2">
+            <h2 className="font-display font-black text-4xl md:text-5xl text-gray-900 tracking-tighter mb-6">
+              OUR MISSION
+            </h2>
+            <p className="text-gray-600 text-lg mb-6 font-medium leading-relaxed">
+              At ABA Health, we believe that premium nutrition should be accessible, transparent, and highly effective. Founded by a team of health enthusiasts and clinical researchers, we set out to disrupt the supplement industry by removing fillers and focusing purely on active, bioavailable ingredients.
+            </p>
+            <p className="text-gray-600 text-lg mb-8 font-medium leading-relaxed">
+              Whether you are an elite athlete, a busy professional, or simply looking to optimize your daily wellness, our products are designed to support your unique journey to peak health.
+            </p>
+            <button className="bg-gray-900 hover:bg-black text-white px-8 py-4 rounded-full font-bold tracking-widest transition-all hover:-translate-y-1">
+              READ OUR STORY
+            </button>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="relative z-20 bg-gray-900 text-white pt-20 pb-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div className="col-span-1 md:col-span-1">
+              <span className="font-display font-black text-3xl text-[#ff5e00] tracking-tighter mb-6 block">
+                ABA HEALTH
+              </span>
+              <p className="text-gray-400 font-medium mb-6">
+                Premium dietary supplements formulated for maximum efficacy and daily wellness.
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff5e00] transition-colors"><Facebook className="w-5 h-5" /></a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff5e00] transition-colors"><Twitter className="w-5 h-5" /></a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ff5e00] transition-colors"><Instagram className="w-5 h-5" /></a>
+              </div>
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Shop</h4>
+              <ul className="space-y-4 text-gray-400 font-medium">
+                <li><a href="#" className="hover:text-white transition-colors">All Products</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Vitamins & Minerals</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Omega & Fish Oils</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Proteins</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Company</h4>
+              <ul className="space-y-4 text-gray-400 font-medium">
+                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Our Science</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Sustainability</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Support</h4>
+              <ul className="space-y-4 text-gray-400 font-medium">
+                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Shipping & Returns</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm font-medium">
+            <p>&copy; {new Date().getFullYear()} ABA Health. All rights reserved.</p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
