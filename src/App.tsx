@@ -1,4 +1,4 @@
-import { Search, ShoppingCart, Menu, Upload, Plus, Minus, ArrowRight, Package, Leaf, ShieldCheck, Zap, Facebook, Twitter, Instagram } from 'lucide-react';
+import { Search, ShoppingCart, Menu, Upload, Plus, Minus, ArrowRight, Package, Leaf, ShieldCheck, Zap, Facebook, Twitter, Instagram, Eye, Heart } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useState, useRef } from 'react';
 
@@ -15,8 +15,50 @@ const productsData = [
   { id: 10, title: "Whey Protein Isolate", composition: "25g Protein for Muscle Recovery", brand: "ABA Premium", price: 6500 },
   { id: 11, title: "B-Complex 100", composition: "Energy Metabolism & Nervous System", brand: "Natural Factors", price: 1800 },
   { id: 12, title: "Iron + Vitamin C", composition: "Gentle Iron for Blood Health", brand: "Doppelherz", price: 1400 },
-  { id: 13, title: "Melatonin 5mg", composition: "Natural Sleep Cycle Support", brand: "Natural Factors", price: 1100 }
+  { id: 13, title: "Melatonin 5mg", composition: "Natural Sleep Cycle Support", brand: "Natural Factors", price: 1100 },
+  { id: 14, title: "Zinc Picolinate 50mg", composition: "Immune & Skin Health", brand: "Natural Factors", price: 1300 },
+  { id: 15, title: "L-Glutamine Powder", composition: "Gut Health & Recovery", brand: "ABA Premium", price: 3200 },
+  { id: 16, title: "Creatine Monohydrate", composition: "Muscle Power & Strength", brand: "ABA Premium", price: 2500 },
+  { id: 17, title: "Turmeric Curcumin", composition: "Joint Support & Anti-inflammatory", brand: "Doppelherz", price: 2900 },
+  { id: 18, title: "CoQ10 100mg", composition: "Heart Health & Energy", brand: "Natural Factors", price: 4800 },
+  { id: 19, title: "BCAA 2:1:1", composition: "Intra-Workout Recovery", brand: "ABA Premium", price: 3400 },
+  { id: 20, title: "Maca Root Extract", composition: "Energy & Vitality", brand: "Natural Factors", price: 1900 },
+  { id: 21, title: "L-Theanine 200mg", composition: "Focus & Stress Relief", brand: "Doppelherz", price: 2100 },
+  { id: 22, title: "Glucosamine Chondroitin", composition: "Joint Mobility", brand: "Natural Factors", price: 3600 },
+  { id: 23, title: "Pre-Workout Explosive", composition: "Energy & Pump", brand: "ABA Premium", price: 4500 }
 ];
+
+function NewArrivalCard({ customImage, title, price }: { customImage: string | null, title: string, price: number }) {
+  return (
+    <div className="min-w-[260px] w-[260px] bg-white/10 backdrop-blur-lg border border-white/20 rounded-[1.25rem] p-4 flex flex-col gap-4 group hover:-translate-y-1 transition-all duration-300 hover:border-[#ccff00]">
+      <div className="w-full aspect-square bg-white/5 rounded-xl relative flex items-center justify-center p-4 overflow-hidden">
+        <div className="absolute top-2 right-2 flex flex-col gap-2 z-10">
+          <button className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ccff00] hover:text-black transition-colors">
+            <Eye className="w-4 h-4" />
+          </button>
+          <button className="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/10 flex items-center justify-center text-white hover:bg-[#ff5e00] hover:border-[#ff5e00] transition-colors">
+            <Heart className="w-4 h-4" />
+          </button>
+        </div>
+        {customImage ? (
+          <img src={customImage} alt={title} className="w-full h-full object-contain drop-shadow-xl group-hover:scale-105 transition-transform duration-500" />
+        ) : (
+          <div className="flex flex-col items-center text-white/30">
+             <Package className="w-8 h-8 mb-2" />
+             <span className="text-[10px] uppercase font-bold tracking-wider">No Visual</span>
+          </div>
+        )}
+      </div>
+      <div className="flex flex-col gap-1 flex-grow">
+        <h3 className="font-display font-bold text-[1.1rem] text-white leading-[1.2] line-clamp-2">{title}</h3>
+        <p className="text-[#ccff00] font-black text-lg mt-1">Ksh {price.toLocaleString()}</p>
+      </div>
+      <button className="w-full py-3 rounded-xl bg-white/10 hover:bg-[#ff5e00] text-white font-black text-sm tracking-widest transition-all flex items-center justify-center gap-2 border border-transparent hover:border-white hover:shadow-[0_0_20px_rgba(255,94,0,0.4)]">
+        <Plus className="w-4 h-4" /> ADD TO CART
+      </button>
+    </div>
+  );
+}
 
 function ProductCard({ customImage, title, composition, brand, basePrice }: { customImage: string | null, title: string, composition: string, brand: string, basePrice: number }) {
   const [quantity, setQuantity] = useState(1);
@@ -74,8 +116,191 @@ function ProductCard({ customImage, title, composition, brand, basePrice }: { cu
   );
 }
 
+function AboutPage() {
+  return (
+    <div className="relative z-20 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-white">
+      <div className="text-center mb-16">
+        <h1 className="font-display font-black text-5xl md:text-7xl tracking-tighter mb-6">
+          ABOUT <span className="text-[#ccff00]">ABA HEALTH</span>
+        </h1>
+        <p className="text-xl text-white/80 max-w-3xl mx-auto font-medium leading-relaxed">
+          We are dedicated to providing premium, scientifically-backed supplements to help you achieve your peak physical and mental performance.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 md:p-12">
+          <h2 className="font-display font-bold text-3xl mb-6 text-[#ccff00]">Our Story</h2>
+          <p className="text-white/80 leading-relaxed mb-6">
+            Founded with a passion for holistic well-being, ABA HEALTH started as a small initiative to bring transparent, high-quality nutrition to our community. We noticed a gap in the market for supplements that were both effective and sustainably sourced.
+          </p>
+          <p className="text-white/80 leading-relaxed">
+            Today, we partner with top researchers and sustainable farms globally to ensure every product we offer meets the highest standards of purity and potency.
+          </p>
+        </div>
+        <div className="relative aspect-square rounded-3xl overflow-hidden border border-white/20 shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80" alt="Laboratory" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-8 text-center">
+        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors">
+          <div className="w-16 h-16 bg-[#ff5e00] rounded-full flex items-center justify-center mx-auto mb-6">
+            <Leaf className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="font-bold text-xl mb-4">Pure Ingredients</h3>
+          <p className="text-white/70 text-sm">We source only the finest raw materials, ensuring no artificial fillers or harmful additives.</p>
+        </div>
+        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors">
+          <div className="w-16 h-16 bg-[#ccff00] rounded-full flex items-center justify-center mx-auto mb-6">
+            <ShieldCheck className="w-8 h-8 text-black" />
+          </div>
+          <h3 className="font-bold text-xl mb-4">Rigorous Testing</h3>
+          <p className="text-white/70 text-sm">Every batch undergoes strict third-party testing for quality, safety, and efficacy.</p>
+        </div>
+        <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors">
+          <div className="w-16 h-16 bg-[#00d2ff] rounded-full flex items-center justify-center mx-auto mb-6">
+            <Zap className="w-8 h-8 text-white" />
+          </div>
+          <h3 className="font-bold text-xl mb-4">Maximum Efficacy</h3>
+          <p className="text-white/70 text-sm">Formulated for optimal absorption so your body gets exactly what it needs.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ContactPage() {
+  return (
+    <div className="relative z-20 py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-white">
+      <div className="text-center mb-16">
+        <h1 className="font-display font-black text-5xl md:text-7xl tracking-tighter mb-6">
+          GET IN <span className="text-[#ff5e00]">TOUCH</span>
+        </h1>
+        <p className="text-xl text-white/80 font-medium">
+          Have questions about our products or your order? We're here to help.
+        </p>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-8 md:p-12 shadow-2xl">
+        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label className="text-sm font-bold tracking-wider uppercase text-white/80">First Name</label>
+              <input type="text" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ccff00] transition-colors" placeholder="John" />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-bold tracking-wider uppercase text-white/80">Last Name</label>
+              <input type="text" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ccff00] transition-colors" placeholder="Doe" />
+            </div>
+          </div>
+          
+          <div className="space-y-2">
+            <label className="text-sm font-bold tracking-wider uppercase text-white/80">Email Address</label>
+            <input type="email" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ccff00] transition-colors" placeholder="john@example.com" />
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-bold tracking-wider uppercase text-white/80">Subject</label>
+            <select className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ccff00] transition-colors appearance-none">
+              <option value="" className="text-black">Select a topic...</option>
+              <option value="order" className="text-black">Order Inquiry</option>
+              <option value="product" className="text-black">Product Question</option>
+              <option value="wholesale" className="text-black">Wholesale</option>
+              <option value="other" className="text-black">Other</option>
+            </select>
+          </div>
+
+          <div className="space-y-2">
+            <label className="text-sm font-bold tracking-wider uppercase text-white/80">Message</label>
+            <textarea rows={5} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-[#ccff00] transition-colors resize-none" placeholder="How can we help you?"></textarea>
+          </div>
+
+          <button type="submit" className="w-full bg-[#ccff00] hover:bg-[#b3e600] text-black py-4 rounded-xl font-black text-lg tracking-widest transition-all hover:shadow-[0_0_20px_rgba(204,255,0,0.4)] mt-4">
+            SEND MESSAGE
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function SciencePage() {
+  return (
+    <div className="relative z-20 py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-white">
+      <div className="text-center mb-16">
+        <h1 className="font-display font-black text-5xl md:text-7xl tracking-tighter mb-6">
+          OUR <span className="text-[#00d2ff]">SCIENCE</span>
+        </h1>
+        <p className="text-xl text-white/80 max-w-3xl mx-auto font-medium leading-relaxed">
+          At ABA Health, we don't guess. We test. Our formulations are built on clinical research and rigorous scientific validation.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-12 items-center mb-24">
+        <div className="relative aspect-square rounded-3xl overflow-hidden border border-white/20 shadow-2xl">
+          <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&q=80" alt="Microscope" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+        </div>
+        <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 md:p-12">
+          <h2 className="font-display font-bold text-3xl mb-6 text-[#00d2ff]">Evidence-Based Formulation</h2>
+          <p className="text-white/80 leading-relaxed mb-6">
+            Every ingredient we select is backed by peer-reviewed clinical trials. We use the exact dosages proven to be effective in human studies, never hiding behind "proprietary blends."
+          </p>
+          <ul className="space-y-4 text-white/80">
+            <li className="flex items-start gap-3">
+              <ShieldCheck className="w-6 h-6 text-[#ccff00] shrink-0" />
+              <span>Third-party tested for heavy metals, microbes, and allergens.</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <ShieldCheck className="w-6 h-6 text-[#ccff00] shrink-0" />
+              <span>Bioavailable forms of vitamins (e.g., Methylcobalamin instead of Cyanocobalamin).</span>
+            </li>
+            <li className="flex items-start gap-3">
+              <ShieldCheck className="w-6 h-6 text-[#ccff00] shrink-0" />
+              <span>Manufactured in cGMP certified facilities.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PrivacyPage() {
+  return (
+    <div className="relative z-20 py-24 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-white">
+      <div className="mb-12">
+        <h1 className="font-display font-black text-4xl md:text-5xl tracking-tighter mb-6">
+          PRIVACY <span className="text-[#ff5e00]">POLICY</span>
+        </h1>
+        <p className="text-white/60">Last updated: April 2026</p>
+      </div>
+
+      <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 md:p-12 space-y-8 text-white/80 leading-relaxed">
+        <section>
+          <h2 className="font-bold text-2xl text-white mb-4">1. Information We Collect</h2>
+          <p>We collect information you provide directly to us when you create an account, make a purchase, or contact us for support. This may include your name, email address, shipping address, and payment information.</p>
+        </section>
+        
+        <section>
+          <h2 className="font-bold text-2xl text-white mb-4">2. How We Use Your Information</h2>
+          <p>We use the information we collect to process your orders, communicate with you about your purchases, and improve our website and product offerings. We do not sell your personal data to third parties.</p>
+        </section>
+
+        <section>
+          <h2 className="font-bold text-2xl text-white mb-4">3. Data Security</h2>
+          <p>We implement industry-standard security measures to protect your personal information during transmission and storage. All payment processing is handled by secure, PCI-compliant third-party processors.</p>
+        </section>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   const [customImage, setCustomImage] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState<'home' | 'about' | 'contact' | 'science' | 'privacy'>('home');
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,9 +328,9 @@ export default function App() {
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex space-x-10">
-              <a href="#" className="text-gray-900 hover:text-[#ff5e00] font-bold text-sm uppercase tracking-wider transition-colors">Products</a>
-              <a href="#" className="text-gray-900 hover:text-[#ff5e00] font-bold text-sm uppercase tracking-wider transition-colors">About Us</a>
-              <a href="#" className="text-gray-900 hover:text-[#ff5e00] font-bold text-sm uppercase tracking-wider transition-colors">Contact</a>
+              <button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('shop-section')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className={`font-bold text-sm uppercase tracking-wider transition-colors ${currentPage === 'home' ? 'text-[#ff5e00]' : 'text-gray-900 hover:text-[#ff5e00]'}`}>Products</button>
+              <button onClick={() => setCurrentPage('about')} className={`font-bold text-sm uppercase tracking-wider transition-colors ${currentPage === 'about' ? 'text-[#ff5e00]' : 'text-gray-900 hover:text-[#ff5e00]'}`}>About Us</button>
+              <button onClick={() => setCurrentPage('contact')} className={`font-bold text-sm uppercase tracking-wider transition-colors ${currentPage === 'contact' ? 'text-[#ff5e00]' : 'text-gray-900 hover:text-[#ff5e00]'}`}>Contact</button>
             </nav>
 
             {/* Icons & CTA */}
@@ -132,6 +357,8 @@ export default function App() {
         </div>
       </header>
 
+      {currentPage === 'home' && (
+        <>
       {/* Hero Section */}
       <main className="relative z-10 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 py-12 min-h-[90vh]">
         
@@ -209,9 +436,31 @@ export default function App() {
 
       </main>
 
+      {/* New Arrivals Section */}
+      <section className="relative z-20 bg-black/30 backdrop-blur-md py-16 border-t border-white/10 w-full">
+        <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16">
+          <div className="flex justify-between items-end mb-8 border-b border-white/10 pb-4">
+            <h2 className="font-display font-black text-3xl md:text-4xl text-white tracking-tighter">
+              NEW TO <span className="text-[#ccff00]">ABA HEALTH</span>
+            </h2>
+            <a href="#" className="text-[#ff5e00] hover:text-white font-bold flex items-center gap-2 transition-colors text-sm md:text-base uppercase tracking-wider">
+              View All <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+            </a>
+          </div>
+          
+          <div className="flex overflow-x-auto gap-6 pb-6 pt-2 snap-x snap-mandatory custom-scrollbar">
+            {productsData.slice(15, 23).map((product) => (
+              <div key={`new-${product.id}`} className="snap-start shrink-0">
+                <NewArrivalCard customImage={customImage} title={product.title} price={product.price} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Shop Section */}
-      <section id="shop-section" className="relative z-20 bg-black/20 backdrop-blur-sm py-24 border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="shop-section" className="relative z-20 bg-black/20 backdrop-blur-sm py-24 border-t border-white/10 w-full">
+        <div className="w-full px-4 sm:px-8 md:px-12 lg:px-16">
           <div className="text-center mb-16">
             <h2 className="font-display font-black text-5xl md:text-6xl text-white tracking-tighter mb-4">
               SHOP <span className="text-[#ccff00]">PREMIUM</span>
@@ -221,7 +470,7 @@ export default function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-8 max-w-[1400px] mx-auto w-full">
+          <div className="grid grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-6 md:gap-8 w-full mx-auto">
             {productsData.map((product) => (
               <ProductCard 
                 key={product.id}
@@ -295,6 +544,13 @@ export default function App() {
           </div>
         </div>
       </section>
+      </>
+      )}
+
+      {currentPage === 'about' && <AboutPage />}
+      {currentPage === 'contact' && <ContactPage />}
+      {currentPage === 'science' && <SciencePage />}
+      {currentPage === 'privacy' && <PrivacyPage />}
 
       {/* Footer */}
       <footer className="relative z-20 bg-gray-900 text-white pt-20 pb-10">
@@ -316,36 +572,31 @@ export default function App() {
             <div>
               <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Shop</h4>
               <ul className="space-y-4 text-gray-400 font-medium">
-                <li><a href="#" className="hover:text-white transition-colors">All Products</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Vitamins & Minerals</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Omega & Fish Oils</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Proteins</a></li>
+                <li><button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('shop-section')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-white transition-colors">All Products</button></li>
+                <li><button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('shop-section')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-white transition-colors">Vitamins & Minerals</button></li>
+                <li><button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('shop-section')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-white transition-colors">Omega & Fish Oils</button></li>
+                <li><button onClick={() => { setCurrentPage('home'); setTimeout(() => document.getElementById('shop-section')?.scrollIntoView({ behavior: 'smooth' }), 100); }} className="hover:text-white transition-colors">Proteins</button></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Company</h4>
               <ul className="space-y-4 text-gray-400 font-medium">
-                <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Our Science</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Sustainability</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
+                <li><button onClick={() => setCurrentPage('about')} className="hover:text-white transition-colors">About Us</button></li>
+                <li><button onClick={() => setCurrentPage('science')} className="hover:text-white transition-colors">Our Science</button></li>
               </ul>
             </div>
             <div>
               <h4 className="font-bold text-lg mb-6 uppercase tracking-wider">Support</h4>
               <ul className="space-y-4 text-gray-400 font-medium">
-                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">FAQs</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Shipping & Returns</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><button onClick={() => setCurrentPage('contact')} className="hover:text-white transition-colors">Contact Us</button></li>
+                <li><button onClick={() => setCurrentPage('privacy')} className="hover:text-white transition-colors">Privacy Policy</button></li>
               </ul>
             </div>
           </div>
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm font-medium">
             <p>&copy; {new Date().getFullYear()} ABA Health. All rights reserved.</p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+              <button onClick={() => setCurrentPage('privacy')} className="hover:text-white transition-colors">Privacy Policy</button>
             </div>
           </div>
         </div>
